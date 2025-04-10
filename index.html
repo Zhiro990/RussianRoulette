@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8" />
+	<link rel="icon" href="./pictures/favicon.ico" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+	<title>RussianRoulette</title>
+	<meta name="description" content="Just a Russian roulette." />
+
+	<meta content="RussianRoulette" property="og:title" />
+	<meta content="Just a Russian roulette." property="og:description" />
+	<meta content="#ffffff" name="theme-color" />
+
+	<script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+	<style>
+		@import url("https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap");
+
+		:root {
+			font-family: "Figtree", sans-serif;
+			font-optical-sizing: auto;
+			font-weight: 600;
+			font-style: normal;
+		}
+	</style>
+
+	<style type="text/tailwindcss">
+		.absolute-center {
+  			@apply -translate-1/2 top-1/2 left-1/2 absolute;
+		}
+		
+		#preloadedImages {
+			@apply size-0 inline bg-[url("./pictures/broken-glass.png")];
+		}
+		
+		#chamber-positioner {
+			@apply h-[105px] w-[60px] -translate-x-1/2 -translate-y-full origin-bottom top-1/2 left-1/2 absolute;
+			
+			& > * {
+				@apply size-[60px] bg-white rounded-full top-0 left-0 absolute;
+			}
+		}
+		
+		#decoration-positioner {
+			@apply h-[185px] w-[80px] -translate-x-1/2 -translate-y-full origin-bottom top-1/2 left-1/2 absolute;
+			& > * {
+				@apply size-[80px] bg-white rounded-full top-0 left-0 absolute;
+			}
+		}
+	</style>
+</head>
+
+<body class="min-h-screen bg-white justify-center items-center text-center">
+	<script>
+		let loaded_chambers = [];
+		let spinned;
+
+		function load(number) {
+			if (spinned) return;
+
+			const chamber = document.querySelector(`#chamber-${number}`);
+			const instruction = document.querySelector("#instruction");
+			const spin_button = document.querySelector("#spin");
+
+			if (loaded_chambers.includes(number)) {
+				loaded_chambers.splice(loaded_chambers.indexOf(number), 1);
+
+				chamber.innerHTML = "";
+			} else {
+				loaded_chambers.push(number);
+
+				const bullet = document.createElement("div");
+
+				bullet.id = "bullet";
+				bullet.classList = "size-[55px] bg-red-600 rounded-full absolute-center";
+
+				chamber.appendChild(bullet);
+			}
+
+			instruction.innerHTML = `Loaded ${loaded_chambers.length} bullet${loaded_chambers.length > 1 ? "s" : ""}.<br>${loaded_chambers.length == 0 ? "Load some bullets!" : loaded_chambers.length == 6 ? "Full loaded? Seriously?" : "You can load more."}`;
+
+			spin_button.disabled = loaded_chambers.length == 0 ? true : false;
+		}
+
+		function spin() {
+			spinned = true;
+
+			const page = document.querySelector("#page");
+			const cylinder = document.querySelector("#cylinder");
+			const instruction = document.querySelector("#instruction");
+			const spin_button = document.querySelector("#spin");
+
+			instruction.hidden = true;
+			spin_button.hidden = true;
+
+			const chosen_number = 1 + Math.floor(Math.random() * 6);
+
+			cylinder.style.transform += `rotate(${1800 - (chosen_number - 1) * 60}deg)`;
+
+			if (loaded_chambers.includes(chosen_number)) {
+				setTimeout(() => {
+					cylinder.style.transitionDuration = "250ms";
+					cylinder.style.transform += `scale(0%)`;
+
+					setTimeout(() => {
+						const broken_glass = document.createElement("img");
+
+						broken_glass.id = "broken-glass";
+						broken_glass.classList = "size-[350px] absolute-center z-10";
+						broken_glass.src = "./pictures/broken-glass.png";
+
+						page.appendChild(broken_glass);
+
+						setTimeout(() => {
+							Swal.fire({
+								title: "You Died",
+								text: "Playing Russian roulette isn't a good idea.",
+								color: "#e7000b",
+								confirmButtonText: "Play Again",
+								confirmButtonColor: "#e7000b"
+							}).then(result => {
+								if (result.isConfirmed) location.reload();
+							});
+						}, 550);
+					}, 100);
+				}, 5500);
+			} else {
+				setTimeout(() => {
+					Swal.fire({
+						title: "You Survived",
+						text: "I guess you're one of the luckiest people.",
+						color: "#e7000b",
+						confirmButtonText: "Play Again",
+						confirmButtonColor: "#e7000b"
+					}).then(result => {
+						if (result.isConfirmed) return location.reload();
+					});
+				}, 5500);
+			}
+		}
+	</script>
+
+	<div id="page" class="h-screen w-full overflow-hidden absolute">
+		<p id="instruction"
+			class="text-[19px] text-red-600 -translate-1/2 top-[calc(50%-180px)] left-1/2 absolute z-10"> Click a
+			chamber to load a bullet. </p>
+
+		<div id="cylinder"
+			class="size-[250px] bg-red-600 rounded-full absolute-center transition-all duration-5000 ease-in-out">
+			<div id="center" class="size-[30px] bg-white rounded-full absolute-center"></div>
+
+			<div id="decorations" class="content">
+				<div id="decoration-positioner" class="rotate-[calc(0*60deg+30deg)]">
+					<div id="decoration"></div>
+				</div>
+
+				<div id="decoration-positioner" class="rotate-[calc(1*60deg+30deg)]">
+					<div id="decoration"></div>
+				</div>
+
+				<div id="decoration-positioner" class="rotate-[calc(2*60deg+30deg)]">
+					<div id="decoration"></div>
+				</div>
+
+				<div id="decoration-positioner" class="rotate-[calc(3*60deg+30deg)]">
+					<div id="decoration"></div>
+				</div>
+
+				<div id="decoration-positioner" class="rotate-[calc(4*60deg+30deg)]">
+					<div id="decoration"></div>
+				</div>
+
+				<div id="decoration-positioner" class="rotate-[calc(5*60deg+30deg)]">
+					<div id="decoration"></div>
+				</div>
+			</div>
+
+			<div id="chambers" class="content">
+				<div id="chamber-positioner" class="rotate-[calc(0*60deg)]">
+					<div id="chamber-1" onclick="load(1);"></div>
+				</div>
+
+				<div id="chamber-positioner" class="rotate-[calc(1*60deg)]">
+					<div id="chamber-2" onclick="load(2);"></div>
+				</div>
+
+				<div id="chamber-positioner" class="rotate-[calc(2*60deg)]">
+					<div id="chamber-3" onclick="load(3);"></div>
+				</div>
+
+				<div id="chamber-positioner" class="rotate-[calc(3*60deg)]">
+					<div id="chamber-4" onclick="load(4);"></div>
+				</div>
+
+				<div id="chamber-positioner" class="rotate-[calc(4*60deg)]">
+					<div id="chamber-5" onclick="load(5);"></div>
+				</div>
+
+				<div id="chamber-positioner" class="rotate-[calc(5*60deg)]">
+					<div id="chamber-6" onclick="load(6);"></div>
+				</div>
+			</div>
+		</div>
+
+		<button id="spin"
+			class="size-fit bg-white text-[19px] text-red-600 border-2 border-red-600 rounded-xl disabled:opacity-40 p-[10px] -translate-1/2 top-[calc(50%+180px)] left-1/2 absolute"
+			onclick="spin();" disabled> Spin </button>
+	</div>
+</body>
+
+</html>
