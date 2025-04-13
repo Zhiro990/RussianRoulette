@@ -64,6 +64,7 @@
 
 			const chamber = document.querySelector(`#chamber-${number}`);
 			const instruction = document.querySelector("#instruction");
+			const pointer = document.querySelector("#pointer");
 			const spin_button = document.querySelector("#spin");
 
 			if (loaded_chambers.includes(number)) {
@@ -95,6 +96,7 @@
 			const spin_button = document.querySelector("#spin");
 
 			instruction.hidden = true;
+			pointer.hidden = false;
 			spin_button.hidden = true;
 
 			const chosen_number = 1 + Math.floor(Math.random() * 6);
@@ -103,6 +105,8 @@
 
 			if (loaded_chambers.includes(chosen_number)) {
 				setTimeout(() => {
+					pointer.hidden = true;
+
 					cylinder.style.transitionDuration = "250ms";
 					cylinder.style.transform += `scale(0%)`;
 
@@ -149,6 +153,8 @@
 			class="text-[19px] text-red-600 -translate-1/2 top-[calc(50%-180px)] left-1/2 absolute z-10"> Click a
 			chamber to load a bullet. </p>
 
+		<div hidden id="pointer" class="size-0 border-t-[35px] border-x-[20px] border-t-red-600 border-x-transparent -translate-1/2 top-[calc(50%-180px)] left-1/2 absolute z-10"></div>
+		
 		<div id="cylinder"
 			class="size-[250px] bg-red-600 rounded-full absolute-center transition-all duration-5000 ease-in-out">
 			<div id="center" class="size-[30px] bg-white rounded-full absolute-center"></div>
