@@ -64,7 +64,6 @@
 
 			const chamber = document.querySelector(`#chamber-${number}`);
 			const instruction = document.querySelector("#instruction");
-			const pointer = document.querySelector("#pointer");
 			const spin_button = document.querySelector("#spin");
 
 			if (loaded_chambers.includes(number)) {
@@ -93,6 +92,8 @@
 			const page = document.querySelector("#page");
 			const cylinder = document.querySelector("#cylinder");
 			const instruction = document.querySelector("#instruction");
+			const broken_glass = document.querySelector("#broken-glass");
+			const pointer = document.querySelector("#pointer");
 			const spin_button = document.querySelector("#spin");
 
 			instruction.hidden = true;
@@ -111,13 +112,7 @@
 					cylinder.style.transform += `scale(0%)`;
 
 					setTimeout(() => {
-						const broken_glass = document.createElement("img");
-
-						broken_glass.id = "broken-glass";
-						broken_glass.classList = "size-[350px] absolute-center z-10";
-						broken_glass.src = "./pictures/broken-glass.png";
-
-						page.appendChild(broken_glass);
+						broken_glass.hidden = false;
 
 						setTimeout(() => {
 							Swal.fire({
@@ -152,6 +147,8 @@
 		<p id="instruction"
 			class="text-[19px] text-red-600 -translate-1/2 top-[calc(50%-180px)] left-1/2 absolute z-10"> Click a
 			chamber to load a bullet. </p>
+
+		<img hidden id="broken-glass" class="size-[350px] absolute-center z-10" src="./pictures/broken-glass.webp"/>
 
 		<div hidden id="pointer" class="size-0 border-t-[35px] border-x-[20px] border-t-red-600 border-x-transparent -translate-1/2 top-[calc(50%-180px)] left-1/2 absolute z-10"></div>
 		
