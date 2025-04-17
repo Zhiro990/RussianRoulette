@@ -1,0 +1,30 @@
+@import url("https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap");
+
+@import "tailwindcss";
+
+:root {
+    font-family: "Figtree", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+}
+
+.absolute-center {
+    @apply -translate-1/2 top-1/2 left-1/2 absolute;
+}
+
+#chamber-positioner {
+    @apply h-[105px] w-[60px] -translate-x-1/2 -translate-y-full origin-bottom top-1/2 left-1/2 absolute;
+
+    &>* {
+        @apply size-[60px] bg-white rounded-full top-0 left-0 absolute;
+    }
+}
+
+#decoration-positioner {
+    @apply h-[185px] w-[80px] -translate-x-1/2 -translate-y-full origin-bottom top-1/2 left-1/2 absolute;
+
+    &>* {
+        @apply size-[80px] bg-white rounded-full top-0 left-0 absolute;
+    }
+}
