@@ -15,7 +15,7 @@
 
 	<link rel="stylesheet" href="./tailwind.css" />
 
-	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script src="./sweetalert2.js"></script>
 </head>
 
 <body class="min-h-screen bg-white justify-center items-center text-center">
@@ -112,10 +112,12 @@
 			class="text-[19px] text-red-600 -translate-1/2 top-[calc(50%-180px)] left-1/2 absolute z-10"> Click a
 			chamber to load a bullet. </p>
 
-		<img hidden id="broken-glass" class="size-[350px] absolute-center z-10" src="./pictures/broken-glass.webp"/>
+		<img hidden id="broken-glass" class="size-[350px] absolute-center z-10" src="./pictures/broken-glass.webp" />
 
-		<div hidden id="pointer" class="size-0 border-t-[35px] border-x-[20px] border-t-red-600 border-x-transparent -translate-1/2 top-[calc(50%-180px)] left-1/2 absolute z-10"></div>
-		
+		<div hidden id="pointer"
+			class="size-0 border-t-[35px] border-x-[20px] border-t-red-600 border-x-transparent -translate-1/2 top-[calc(50%-180px)] left-1/2 absolute z-10">
+		</div>
+
 		<div id="cylinder"
 			class="size-[250px] bg-red-600 rounded-full absolute-center transition-all duration-5000 ease-in-out">
 			<div id="center" class="size-[30px] bg-white rounded-full absolute-center"></div>
