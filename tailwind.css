@@ -1,6 +1,11 @@
 /*! tailwindcss v4.1.4 | MIT License | https://tailwindcss.com */
-@import url("https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap");
 @layer properties;
+@font-face {
+  font-family: "Figtree";
+  font-weight: 100 900;
+  src: url("./fonts/figtree.ttf") format("truetype-variations");
+  src: url("./fonts/figtree.ttf") format("truetype") tech("variations");
+}
 @layer theme, base, components, utilities;
 @layer theme {
   :root, :host {
@@ -183,14 +188,44 @@
   .z-10 {
     z-index: 10;
   }
+  .container {
+    width: 100%;
+    @media (width >= 40rem) {
+      max-width: 40rem;
+    }
+    @media (width >= 48rem) {
+      max-width: 48rem;
+    }
+    @media (width >= 64rem) {
+      max-width: 64rem;
+    }
+    @media (width >= 80rem) {
+      max-width: 80rem;
+    }
+    @media (width >= 96rem) {
+      max-width: 96rem;
+    }
+  }
   .mt-\[20px\] {
     margin-top: 20px;
   }
   .mt-\[250px\] {
     margin-top: 250px;
   }
+  .block {
+    display: block;
+  }
+  .flex {
+    display: flex;
+  }
+  .grid {
+    display: grid;
+  }
   .hidden {
     display: none;
+  }
+  .inline-block {
+    display: inline-block;
   }
   .size-0 {
     width: calc(var(--spacing) * 0);
@@ -336,6 +371,11 @@
   .text-red-600 {
     color: var(--color-red-600);
   }
+  .transition {
+    transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to, opacity, box-shadow, transform, translate, scale, rotate, filter, -webkit-backdrop-filter, backdrop-filter;
+    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
+    transition-duration: var(--tw-duration, var(--default-transition-duration));
+  }
   .transition-all {
     transition-property: all;
     transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
@@ -355,11 +395,9 @@
     }
   }
 }
-:root {
-  font-family: "Figtree", sans-serif;
-  font-optical-sizing: auto;
+body {
+  font-family: "Figtree";
   font-weight: 600;
-  font-style: normal;
 }
 .absolute-center {
   position: absolute;

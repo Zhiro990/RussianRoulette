@@ -1,12 +1,15 @@
-@import url("https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap");
+@font-face {
+    font-family: "Figtree";
+    font-weight: 100 900;
+    src: url("./fonts/figtree.ttf") format("truetype-variations");
+    src: url("./fonts/figtree.ttf") format("truetype") tech("variations");
+  }
 
 @import "tailwindcss";
 
-:root {
-    font-family: "Figtree", sans-serif;
-    font-optical-sizing: auto;
+body {
+    font-family: "Figtree";
     font-weight: 600;
-    font-style: normal;
 }
 
 .absolute-center {
